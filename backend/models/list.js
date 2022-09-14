@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const listSchema = new mongoose.Schema({
     title: String,
     date: Date,
-    user: [
+    users: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
