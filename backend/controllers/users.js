@@ -15,6 +15,7 @@ usersRouter.get('/:id', async(request, response) => {
 
     response.json(user)
 })
+
 // create a new user
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body
