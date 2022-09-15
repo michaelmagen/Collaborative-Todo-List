@@ -1,11 +1,12 @@
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
+const List = require ('../models/list')
+const Item = require('../models/item')
 
 // get all of the users in the DB
 usersRouter.get('/', async(request, response) => {
-    //const users = await User.find({}).populate('lists').populate('items')
-    const users = await User.find({})
+    const users = await User.find({}).populate('lists').populate('items')
     response.json(users)
 })
 
