@@ -5,8 +5,8 @@ const List = require ('../models/list')
 const Item = require('../models/item')
 
 // get all of the users in the DB
-usersRouter.get('/', async(request, response) => {
-    const users = await User.find({}).populate('lists').populate('items')
+usersRouter.get('/:user', async(request, response) => {
+    const users = await User.find({username: request.params.user}).populate('lists').populate('items')
     response.json(users)
 })
 
