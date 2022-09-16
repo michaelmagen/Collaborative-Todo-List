@@ -67,17 +67,24 @@ listRouter.delete('/:id', async (request, response) => {
 
   const user = await User.findById(decodedToken.id)
 
-  const listToDelete = await List.findById(request.params.id)
+  const list = await List.findById(request.params.id)
 
-  const usersInList = listToDelete.users.map(user => user._id.toString())
+  const usersInList = list.users.map(user => user._id.toString())
 
-  if ( usersInList.includes( user._id.toString() )) {
-    await List.findByIdAndRemove(request.params.id)
-    response.status(204).end()
-  } else {
-    return response.status(401).json({ error: `Unauthorized` })
-  }
+  if (usersInList.length === 1) {
+    if ( usersInList.includes( user._id.toString() )) {
+      await List.findByIdAndRemove(request.params.id)
+      response.status(204).end()
+      return
+    } else {
+      return response.status(401).json({ error: `Unauthorized` })
+    }
+  } 
 
+  list.users = list.users.filter(x => x._id != user._id)
+  await list.save()
+
+  response.status(201).end()
 })
 
 module.exports = listRouter

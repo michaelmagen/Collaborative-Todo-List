@@ -4,10 +4,15 @@ const User = require('../models/user')
 const List = require ('../models/list')
 const Item = require('../models/item')
 
-// get all of the users in the DB
-usersRouter.get('/:user', async(request, response) => {
-    const users = await User.find({username: request.params.user}).populate('lists').populate('items')
-    response.json(users)
+// get a user in the database
+usersRouter.get('/:username', async(request, response) => {
+    const user = await User.find({username: request.params.username}).populate('lists').populate('items')
+    if (user === null) {
+      return resposnse.status(400).json({
+        error: 'username not in database'
+      })
+    }
+    response.json(user)
 })
 
 usersRouter.get('/:id', async(request, response) => {
