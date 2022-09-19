@@ -11,9 +11,9 @@ const getUser = async username => {
     return response.data
 }
 
-const services = {
+const userService = {
     createUser,
     getUser
 }
 
-export default services
+export default userService
