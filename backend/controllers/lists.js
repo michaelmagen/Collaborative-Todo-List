@@ -20,8 +20,7 @@ listRouter.get('/', async (request, response) => {
 // get a specific list by the id
 ////////////not tested /////////////
 listRouter.get('/:id', async (request, response) => {
-    const id = request.params.id
-    const list = await List.findById({id}).populate('creator').populate('users').populate('items')
+    const list = await List.findById(request.params.id).populate('creator').populate('users').populate('items')
     response.json(list)
 })
 

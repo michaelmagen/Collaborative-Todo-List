@@ -8,16 +8,15 @@ const Item = require('../models/item')
 usersRouter.get('/:username', async(request, response) => {
     const user = await User.find({username: request.params.username}).populate('lists').populate('items')
     if (user === null) {
-      return resposnse.status(400).json({
+      return response.status(400).json({
         error: 'username not in database'
       })
     }
     response.json(user)
 })
 
-usersRouter.get('/:id', async(request, response) => {
+usersRouter.get('/id/:id', async(request, response) => {
     const user = await User.findById(request.params.id)
-
     response.json(user)
 })
 
