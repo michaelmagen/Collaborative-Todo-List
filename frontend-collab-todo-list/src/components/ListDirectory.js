@@ -20,7 +20,7 @@
 // </>
 // )
 
-const ListDirectory = ({lists, handleListChange}) => {
+const ListDirectory = ({lists, handleListChange, newList, setNewList, handleListAddition}) => {
   if (lists === null) {
     return (<></>)
   }
@@ -31,6 +31,14 @@ const ListDirectory = ({lists, handleListChange}) => {
       {lists.map(list => 
         <option value={list.id} key={list.title}> {list.title} </option>)}
     </select>
+    <br></br> 
+    <input 
+      type="text"
+      value={newList}
+      placeholder="New List Item"
+      onChange={({ target }) => setNewList(target.value)}
+      />
+    <button onClick={handleListAddition}> Create New List </button>
     </>
   )
 }

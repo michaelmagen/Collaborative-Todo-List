@@ -14,6 +14,7 @@ function App() {
   const [lists, setLists] = useState(null)
   const [activeList, setActiveList] = useState(null)
   const [newItem, setNewItem] = useState('')
+  const [newList, setNewList] = useState('')
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedListappUser')
@@ -97,6 +98,30 @@ function App() {
     }
   }
 
+  const handleListAddition = async (event) => {
+    event.preventDefault()
+    if (newList === '') {
+      /// TODO: error message to the user
+      console.log('items in the to do list can not be empty')
+      return
+    }
+    try {
+      const list = {
+        title: newList
+      }
+      const savedList = await listService.createList(list)
+      setNewList('')
+      
+      // update the user with the new list so that there is no need to refresh
+      const newLists = lists.concat(savedList)
+      setLists(newLists)
+    } catch (exception) {
+      /// TODO: error message to user
+      console.log('error with adding a list to the user');
+      setNewItem('')
+    }
+  }
+
   return (
     <div>
       <h1>TODO List App</h1>
@@ -110,7 +135,13 @@ function App() {
             /> :
         <div>
           <p>{user.name} logged-in</p>
-          <ListDirectory lists={lists} handleListChange={handleListChange} />
+          <ListDirectory 
+            lists={lists} 
+            handleListChange={handleListChange} 
+            newList={newList}
+            setNewList={setNewList}
+            handleListAddition={handleListAddition}
+            />
           <List 
             activeList={activeList} 
             handleCheckbox={handleCheckbox} 

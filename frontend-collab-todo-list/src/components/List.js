@@ -29,6 +29,7 @@ const List = ({activeList, handleCheckbox, handleItemAddition, newItem, setNewIt
     <input 
       type="text"
       value={newItem}
+      placeholder="New List Item"
       onChange={({ target }) => setNewItem(target.value)}
       />
     <button onClick={handleItemAddition}> Add </button>
