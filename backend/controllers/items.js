@@ -15,6 +15,8 @@ itemRouter.post('/:listid', async(request, response) => {
     const body = request.body
 
     const token = request.token
+
+    console.log(request)
     const decodedToken = jwt.verify(token, process.env.SECRET)
     if (!decodedToken.id) {
       return response.status(401).json({ error: 'token missing or invalid' })
@@ -23,11 +25,12 @@ itemRouter.post('/:listid', async(request, response) => {
     const list = await List.findById(request.params.listid)
   
     if (!body.content ) {
-      response.status(400).end().json({
+      response.status(400).json({
         error: 'content is missing'
       })
+      return
     }
-  
+
     const item = new Item({
       content: body.content,
       date: new Date(),
