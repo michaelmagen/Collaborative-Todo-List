@@ -13,6 +13,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [lists, setLists] = useState(null)
   const [activeList, setActiveList] = useState(null)
+  const [newItem, setNewItem] = useState('')
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedListappUser')
@@ -51,6 +52,7 @@ function App() {
       setUsername('')
       setPassword('')
     } catch (exception) {
+      /// TODO: error message
       console.log('Wrong credentials')
       setTimeout(() => {
         console.log('display some error message');
@@ -70,6 +72,31 @@ function App() {
     console.log('clicked on the check box');
   }
 
+  const handleItemAddition = async (event) => {
+    event.preventDefault()
+    if (newItem === '') {
+      /// TODO: error message to the user
+      console.log('items in the to do list can not be empty')
+      return
+    }
+    // pass in the new item object and the list id
+    try {
+      const item = {
+        content: newItem
+      }
+      const savedItem = await listService.createItem(item, activeList.id)
+      setNewItem('')
+
+      // update the active list with the new item so that the user does not need to refresh to see a new item
+      const newActiveList = { ...activeList, items: activeList.items.concat(savedItem) }
+      setActiveList(newActiveList)
+    } catch (exception) {
+      /// TODO: error message to user
+      console.log('error with adding item to the list');
+      setNewItem('')
+    }
+  }
+
   return (
     <div>
       <h1>TODO List App</h1>
@@ -84,7 +111,13 @@ function App() {
         <div>
           <p>{user.name} logged-in</p>
           <ListDirectory lists={lists} handleListChange={handleListChange} />
-          <List activeList={activeList} handleCheckbox={handleCheckbox}/>
+          <List 
+            activeList={activeList} 
+            handleCheckbox={handleCheckbox} 
+            newItem={newItem} 
+            setNewItem={setNewItem}
+            handleItemAddition={handleItemAddition}
+            />
         </div>
       }
     </div>

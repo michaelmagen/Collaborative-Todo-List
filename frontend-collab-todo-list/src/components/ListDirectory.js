@@ -25,11 +25,13 @@ const ListDirectory = ({lists, handleListChange}) => {
     return (<></>)
   }
   return (
+    <>
+    <h3>Select List</h3> 
     <select onChange={handleListChange}>
-      <option value='none'> Select a List</option>
       {lists.map(list => 
         <option value={list.id} key={list.title}> {list.title} </option>)}
     </select>
+    </>
   )
 }
 

@@ -13,7 +13,7 @@ import ListItem from "./ListItem"
 //   </>
 // )}
 
-const List = ({activeList, handleCheckbox}) => 
+const List = ({activeList, handleCheckbox, handleItemAddition, newItem, setNewItem}) => 
 {
   if (activeList === null) {
     return (<></>)
@@ -26,6 +26,12 @@ const List = ({activeList, handleCheckbox}) =>
          <ListItem item={item} handleCheckbox={handleCheckbox}/>
       </div>
     ))}
+    <input 
+      type="text"
+      value={newItem}
+      onChange={({ target }) => setNewItem(target.value)}
+      />
+    <button onClick={handleItemAddition}> Add </button>
   </>
 )}
 export default List
