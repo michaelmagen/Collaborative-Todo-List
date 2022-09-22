@@ -1,6 +1,6 @@
 const ListItem = ({item, handleCheckbox}) => (
   <>
-    <input type="checkbox" onClick={ handleCheckbox }></input>
+    <input type="checkbox" onClick={ handleCheckbox } value={item.id}></input>
     {item.content}
   </>
 )

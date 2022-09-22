@@ -17,6 +17,7 @@ function App() {
   const [newList, setNewList] = useState('')
 
   useEffect(() => {
+
     const loggedUserJSON = window.localStorage.getItem('loggedListappUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -69,8 +70,22 @@ function App() {
     setActiveList(newList)
   }
 
-  const handleCheckbox = () => {
-    console.log('clicked on the check box');
+  const handleCheckbox = async (event) => {
+    console.log('clicked on the check box')
+    console.log(event.target.value)
+    try {
+      setTimeout( async () =>  {
+        await listService.deleteItem(event.target.value)
+        const newListItems = activeList.items.filter(list => list.id !== event.target.value)
+        const newActiveList = {...activeList, items: newListItems}
+        setActiveList(newActiveList)
+        console.log('the list items are now', newActiveList);
+      }, 1000)
+    } catch(exception) {
+      /// TODO: SHOW ERROR TO THE USER
+      console.log(exception)
+
+    }
   }
 
   const handleItemAddition = async (event) => {
@@ -93,7 +108,7 @@ function App() {
       setActiveList(newActiveList)
     } catch (exception) {
       /// TODO: error message to user
-      console.log('error with adding item to the list');
+      console.log(exception);
       setNewItem('')
     }
   }
@@ -115,9 +130,9 @@ function App() {
       // update the user with the new list so that there is no need to refresh
       const newLists = lists.concat(savedList)
       setLists(newLists)
-    } catch (exception) {
+    } catch (error) {
       /// TODO: error message to user
-      console.log('error with adding a list to the user');
+      console.log(error.response.data)
       setNewItem('')
     }
   }
@@ -142,6 +157,7 @@ function App() {
             setNewList={setNewList}
             handleListAddition={handleListAddition}
             />
+            <button>Delete Current List</button>
           <List 
             activeList={activeList} 
             handleCheckbox={handleCheckbox} 

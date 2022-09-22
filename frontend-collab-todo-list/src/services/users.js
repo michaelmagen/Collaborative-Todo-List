@@ -11,6 +11,7 @@ const getUser = async username => {
     return response.data
 }
 
+
 const userService = {
     createUser,
     getUser
