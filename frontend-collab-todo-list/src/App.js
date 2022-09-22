@@ -7,6 +7,7 @@ import ListDirectory from './components/ListDirectory'
 import List from './components/List'
 
 
+
 function App() {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
@@ -114,7 +115,6 @@ function App() {
   }
 
   const handleListAddition = async (event) => {
-    event.preventDefault()
     if (newList === '') {
       /// TODO: error message to the user
       console.log('items in the to do list can not be empty')
@@ -157,7 +157,6 @@ function App() {
             setNewList={setNewList}
             handleListAddition={handleListAddition}
             />
-            <button>Delete Current List</button>
           <List 
             activeList={activeList} 
             handleCheckbox={handleCheckbox} 
