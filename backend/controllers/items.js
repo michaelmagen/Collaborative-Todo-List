@@ -16,8 +16,8 @@ itemRouter.post('/:listid', async(request, response) => {
 
     const token = request.token
 
-    console.log(request)
     const decodedToken = jwt.verify(token, process.env.SECRET)
+
     if (!decodedToken.id) {
       return response.status(401).json({ error: 'token missing or invalid' })
     }
