@@ -18,7 +18,7 @@ function App() {
   const [newItem, setNewItem] = useState('')
   const [newList, setNewList] = useState('')
   const [createUser, setCreateUser] = useState(false)
-  const [fullName, setFullName] = useState('')
+  const [name, setName] = useState('')
 
   useEffect(() => {
 
@@ -34,6 +34,8 @@ function App() {
     const populateLists = async () => {
       const userWithLists = await userService.getUser(user.username)
       setLists(userWithLists[0].lists)
+      if (userWithLists[0].lists.length === 0)
+        return 
       const list = await listService.getList(userWithLists[0].lists[0].id)
       setActiveList(list)
     }
@@ -66,8 +68,30 @@ function App() {
     }
   }
 
-  const handleRegistration = async () => {
-    console.log('a user should be created');
+  const handleRegistration = async (event) => {
+    event.preventDefault()
+    try {
+      const newUser = await userService.createUser({
+        username, name, password
+      })
+      console.log(newUser)
+
+      // log the user in 
+      const user = await loginService.login({
+        username, password,
+      })
+
+      window.localStorage.setItem(
+        'loggedListappUser', JSON.stringify(user)
+      ) 
+
+      setUser(user)
+      setUsername('')
+      setPassword('')
+      setName('')
+    } catch(exception) {
+      console.log('not able to create user')
+    }
   }
 
   const handleListChange = async (e) => {
@@ -152,10 +176,10 @@ function App() {
           <RegisterForm 
             username={username}
             password={password}
-            fullName={fullName}
+            name={name}
             setUsername={setUsername}
             setPassword={setPassword}
-            setFullName={setFullName}
+            setName={setName}
             handleRegistration={handleRegistration}
             setCreateUser={setCreateUser}
             /> :
@@ -191,4 +215,3 @@ function App() {
 
 export default App
 
-//<List title={activeList.title}  listItems={activeList.items} handleCheckbox={handleCheckbox} />

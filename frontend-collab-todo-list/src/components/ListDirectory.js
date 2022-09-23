@@ -9,7 +9,7 @@ const ListDirectory = ({lists, handleListChange, newList, setNewList, handleList
     <h3>Select List</h3> 
     <select onChange={handleListChange}>
       {lists.map(list => 
-        <option value={list.id} key={list.title}> {list.title} </option>)}
+        <option value={list.id} key={list.id}> {list.title} </option>)}
     </select>
     <br></br> 
     <Popup trigger={<button> Create New List</button>} modal>

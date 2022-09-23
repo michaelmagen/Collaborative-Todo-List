@@ -5,9 +5,9 @@ const RegisterForm = (props) => (
       full name
         <input
         type="test"
-        value={props.fullname}
+        value={props.name}
         name="Password"
-        onChange={({ target }) => props.setFullName(target.value)}
+        onChange={({ target }) => props.setName(target.value)}
       />
     </div>
     <div>
