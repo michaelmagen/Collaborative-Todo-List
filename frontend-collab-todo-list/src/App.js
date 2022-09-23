@@ -5,6 +5,7 @@ import listService from './services/lists'
 import userService from './services/users'
 import ListDirectory from './components/ListDirectory'
 import List from './components/List'
+import RegisterForm from './components/RegisterForm'
 
 
 
@@ -16,6 +17,8 @@ function App() {
   const [activeList, setActiveList] = useState(null)
   const [newItem, setNewItem] = useState('')
   const [newList, setNewList] = useState('')
+  const [createUser, setCreateUser] = useState(false)
+  const [fullName, setFullName] = useState('')
 
   useEffect(() => {
 
@@ -61,6 +64,10 @@ function App() {
         console.log('display some error message');
       }, 5000)
     }
+  }
+
+  const handleRegistration = async () => {
+    console.log('a user should be created');
   }
 
   const handleListChange = async (e) => {
@@ -141,12 +148,24 @@ function App() {
     <div>
       <h1>TODO List App</h1>
       {user === null ?
-        <LoginForm 
+        createUser ? 
+          <RegisterForm 
+            username={username}
+            password={password}
+            fullName={fullName}
+            setUsername={setUsername}
+            setPassword={setPassword}
+            setFullName={setFullName}
+            handleRegistration={handleRegistration}
+            setCreateUser={setCreateUser}
+            /> :
+          <LoginForm 
             handleLogin={handleLogin} 
             username={username} 
             password={password} 
             setPassword={setPassword} 
             setUsername={setUsername}
+            setCreateUser={setCreateUser}
             /> :
         <div>
           <p>{user.name} logged-in</p>
