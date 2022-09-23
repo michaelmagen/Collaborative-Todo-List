@@ -168,6 +168,13 @@ function App() {
     }
   }
 
+  const handleLogOut = () => {
+    if (user === null)
+      return
+    setUser(null)
+    localStorage.removeItem('loggedListappUser')
+  }
+
   return (
     <div>
       <h1>TODO List App</h1>
@@ -193,6 +200,7 @@ function App() {
             /> :
         <div>
           <p>{user.name} logged-in</p>
+          <button onClick={handleLogOut}>Log Out</button>
           <ListDirectory 
             lists={lists} 
             handleListChange={handleListChange} 
