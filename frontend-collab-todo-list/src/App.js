@@ -38,7 +38,8 @@ function App() {
       setLists(userWithLists[0].lists)
       if (userWithLists[0].lists.length === 0)
         return 
-      const list = await listService.getList(userWithLists[0].lists[0].id)
+      //const list = await listService.getList(userWithLists[0].lists[0].id)
+      await listService.getList(userWithLists[0].lists[0].id)
       //setActiveList(list)
     }
     if (user != null) {
