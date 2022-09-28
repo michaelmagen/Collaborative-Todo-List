@@ -6,6 +6,8 @@ import userService from './services/users'
 import ListDirectory from './components/ListDirectory'
 import List from './components/List'
 import RegisterForm from './components/RegisterForm'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 
@@ -37,7 +39,7 @@ function App() {
       if (userWithLists[0].lists.length === 0)
         return 
       const list = await listService.getList(userWithLists[0].lists[0].id)
-      setActiveList(list)
+      //setActiveList(list)
     }
     if (user != null) {
       populateLists()
@@ -96,6 +98,7 @@ function App() {
 
   const handleListChange = async (e) => {
     if (e.target.value === 'none') {
+      setActiveList(null)
       return
     }
     const newList = await listService.getList(e.target.value)
@@ -161,6 +164,7 @@ function App() {
       // update the user with the new list so that there is no need to refresh
       const newLists = lists.concat(savedList)
       setLists(newLists)
+      setActiveList(savedList)
     } catch (error) {
       /// TODO: error message to user
       console.log(error.response.data)
@@ -173,6 +177,23 @@ function App() {
       return
     setUser(null)
     localStorage.removeItem('loggedListappUser')
+  }
+
+  const handleListDeletion = async () => {
+    if (!window.confirm(`Delete list called ${activeList.title}?`)) {
+      const newLists = lists.filter(list => list.id !== activeList.id)
+      console.log(newLists)
+      return 
+    }
+    try {
+      await listService.deleteList(activeList.id)
+      console.log(lists);
+      const newLists = lists.filter(list => list.id !== activeList.id)
+      setLists(newLists)
+      setActiveList(null)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -208,6 +229,7 @@ function App() {
             setNewList={setNewList}
             handleListAddition={handleListAddition}
             />
+            <button onClick={handleListDeletion}> Delete Current List </button>
           <List 
             activeList={activeList} 
             handleCheckbox={handleCheckbox} 
