@@ -6,7 +6,10 @@ import userService from './services/users'
 import ListDirectory from './components/ListDirectory'
 import List from './components/List'
 import RegisterForm from './components/RegisterForm'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import PopupForm from './components/PopupForm'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min'
+
 
 
 
@@ -21,6 +24,18 @@ function App() {
   const [newList, setNewList] = useState('')
   const [createUser, setCreateUser] = useState(false)
   const [name, setName] = useState('')
+  // for popup form
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
+  const handleUserAddition = () => {
+    
+
+    handleClose()
+  }
+
 
   useEffect(() => {
 
@@ -238,6 +253,7 @@ function App() {
             setNewItem={setNewItem}
             handleItemAddition={handleItemAddition}
             />
+            <PopupForm show={show} handleClose={handleClose} handleShow={handleShow} />
         </div>
       }
     </div>

@@ -63,7 +63,8 @@ const listService = {
   getList,
   deleteList,
   createItem,
-  deleteItem
+  deleteItem,
+  addListUser
 }
 
 export default listService
