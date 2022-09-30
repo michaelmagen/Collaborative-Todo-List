@@ -243,7 +243,7 @@ function App() {
             setUsername={setUsername}
             setCreateUser={setCreateUser}
             /> :
-        <div>
+        <>
           <p>{user.name} logged-in</p>
           <button onClick={handleLogOut}>Log Out</button>
           <ListDirectory 
@@ -254,6 +254,8 @@ function App() {
             handleListAddition={handleListAddition}
             />
             <button onClick={handleListDeletion}> Delete Current List </button>
+            <PopupForm show={show} handleClose={handleClose} handleShow={handleShow} addUser={addUser} handleUserAddition={handleUserAddition}
+            setAddUser={setAddUser}/>
           <List 
             activeList={activeList} 
             handleCheckbox={handleCheckbox} 
@@ -261,9 +263,7 @@ function App() {
             setNewItem={setNewItem}
             handleItemAddition={handleItemAddition}
             />
-            <PopupForm show={show} handleClose={handleClose} handleShow={handleShow} addUser={addUser} handleUserAddition={handleUserAddition}
-            setAddUser={setAddUser}/>
-        </div>
+        </>
       }
     </div>
   )
