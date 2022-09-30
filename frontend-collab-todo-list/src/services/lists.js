@@ -8,6 +8,15 @@ const setToken = newToken => {
   token = `bearer ${newToken}`
 }
 
+const addListUser = async (id, newUsername) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  const response = await axios.post(`${baseUrlList}/user/${id}`, newUsername, config)
+  return response.data
+}
+
 const createList = async newObject => {
   const config = {
     headers: { Authorization: token },
