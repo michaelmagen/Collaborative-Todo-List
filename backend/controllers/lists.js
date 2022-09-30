@@ -94,7 +94,7 @@ listRouter.post('/user/:listid', async (request, response) => {
   const newUser = await User.findOne({ username: request.body.username })
 
   if (newUser === null) {
-    return response.status(401).json({ error: `User does not exist` })
+    return response.status(400).json({ error: `User does not exist` })
   }
 
   const list = await List.findById(request.params.listid)

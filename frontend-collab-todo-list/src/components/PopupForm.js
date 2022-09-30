@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 
-const  PopupForm = ({show, handleShow, handleClose}) => {
+const  PopupForm = ({show, handleShow, handleClose, addUser, handleUserAddition, setAddUser}) => {
 
   return (
     <>
@@ -26,6 +26,8 @@ const  PopupForm = ({show, handleShow, handleClose}) => {
               >
                 <Form.Control
                   type="text"
+                  defaultValue={addUser}
+                  onChange={(target) => {setAddUser(target.target.value)}}
                   placeholder="username"
                   autoFocus
                 />
@@ -37,7 +39,7 @@ const  PopupForm = ({show, handleShow, handleClose}) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" type="submit" onClick={handleUserAddition}>
             Add to List
           </Button>
         </Modal.Footer>

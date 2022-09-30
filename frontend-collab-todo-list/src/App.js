@@ -10,10 +10,6 @@ import PopupForm from './components/PopupForm'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 
-
-
-
-
 function App() {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
@@ -26,19 +22,30 @@ function App() {
   const [name, setName] = useState('')
   // for popup form
   const [show, setShow] = useState(false)
+  const [addUser, setAddUser] = useState('')
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
   const handleUserAddition = () => {
-    
-
+    console.log(addUser)
+    try {
+      const username = {
+        username : addUser
+      }
+      const newList = listService.addListUser(activeList.id,username)
+      console.log(newList)
+    } catch (error) {
+      // todo: error message
+      console.log('user not found');
+    }
+    setAddUser('')
     handleClose()
   }
 
 
   useEffect(() => {
-
+    setAddUser('')
     const loggedUserJSON = window.localStorage.getItem('loggedListappUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -192,6 +199,7 @@ function App() {
     if (user === null)
       return
     setUser(null)
+    setActiveList(null)
     localStorage.removeItem('loggedListappUser')
   }
 
@@ -253,7 +261,8 @@ function App() {
             setNewItem={setNewItem}
             handleItemAddition={handleItemAddition}
             />
-            <PopupForm show={show} handleClose={handleClose} handleShow={handleShow} />
+            <PopupForm show={show} handleClose={handleClose} handleShow={handleShow} addUser={addUser} handleUserAddition={handleUserAddition}
+            setAddUser={setAddUser}/>
         </div>
       }
     </div>
