@@ -86,4 +86,26 @@ listRouter.delete('/:id', async (request, response) => {
   response.status(201).end()
 })
 
+// need to pass in the id of the new user being added
+listRouter.post('/user/:listid', async (request, response) => {
+  // const token = request.token
+  // const decodedToken = jwt.verify(token, process.env.SECRET)
+
+  const newUser = await User.findOne({ username: request.body.username })
+
+  if (newUser === null) {
+    return response.status(401).json({ error: `User does not exist` })
+  }
+
+  const list = await List.findById(request.params.listid)
+
+  list.users = list.users.concat(newUser._id)
+  await list.save()
+
+  newUser.lists = newUser.lists.concat(list._id)
+  await newUser.save()
+
+  response.status(204).end()
+})
+
 module.exports = listRouter
