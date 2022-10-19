@@ -7,6 +7,7 @@ import ListDirectory from './components/ListDirectory'
 import List from './components/List'
 import RegisterForm from './components/RegisterForm'
 import PopupForm from './components/PopupForm'
+import AlertMessage from './components/Alert'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 
@@ -23,6 +24,9 @@ function App() {
   // for popup form
   const [show, setShow] = useState(false)
   const [addUser, setAddUser] = useState('')
+  // state for alerts
+  const [message, setMessage] = useState('')
+  const [variant, setVariant] = useState('')
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -36,8 +40,11 @@ function App() {
       const newList = listService.addListUser(activeList.id,username)
       console.log(newList)
     } catch (error) {
-      // todo: error message
-      console.log('user not found');
+      setMessage('Unable to add user. Make sure that the username entered is correct!')
+      setVariant('danger')
+      setTimeout( () => {
+        setMessage('')
+      }, 5000)
     }
     setAddUser('')
     handleClose()
@@ -223,6 +230,7 @@ function App() {
   return (
     <div>
       <h1>TODO List App</h1>
+      <AlertMessage variant={variant} message={message}></AlertMessage>
       {user === null ?
         createUser ? 
           <RegisterForm 
