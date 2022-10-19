@@ -10,6 +10,7 @@ import PopupForm from './components/PopupForm'
 import AlertMessage from './components/Alert'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
+import ListButton from './components/Button'
 
 function App() {
   const [username, setUsername] = useState('') 
@@ -226,6 +227,8 @@ function App() {
       console.log(error)
     }
   }
+  
+  const deleteButtonVariant = activeList == null ? '' : 'danger'
 
   return (
     <div>
@@ -260,8 +263,12 @@ function App() {
             newList={newList}
             setNewList={setNewList}
             handleListAddition={handleListAddition}
-            />
-          <button onClick={handleListDeletion}> Delete Current List </button>
+          />
+          <ListButton 
+            onClick={handleListDeletion} 
+            variant={deleteButtonVariant} 
+            text='Delete Current List' 
+          />
           <PopupForm 
             show={show} 
             handleClose={handleClose} 
@@ -270,14 +277,14 @@ function App() {
             handleUserAddition={handleUserAddition}
             setAddUser={setAddUser}
             activeList={activeList}
-            />
+          />
           <List 
             activeList={activeList} 
             handleCheckbox={handleCheckbox} 
             newItem={newItem} 
             setNewItem={setNewItem}
             handleItemAddition={handleItemAddition}
-            />
+          />
         </>
       }
     </div>
