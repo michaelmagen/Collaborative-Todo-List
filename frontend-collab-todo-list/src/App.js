@@ -268,7 +268,9 @@ function App() {
             handleShow={handleShow} 
             addUser={addUser} 
             handleUserAddition={handleUserAddition}
-            setAddUser={setAddUser}/>
+            setAddUser={setAddUser}
+            activeList={activeList}
+            />
           <List 
             activeList={activeList} 
             handleCheckbox={handleCheckbox} 

@@ -4,8 +4,10 @@ import Modal from 'react-bootstrap/Modal'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 
-const  PopupForm = ({show, handleShow, handleClose, addUser, handleUserAddition, setAddUser}) => {
-
+const  PopupForm = ({show, handleShow, handleClose, addUser, handleUserAddition, setAddUser, activeList}) => {
+  if (activeList === null) {
+    return
+  }
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
