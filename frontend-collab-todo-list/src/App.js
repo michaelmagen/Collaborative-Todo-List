@@ -261,8 +261,13 @@ function App() {
             setNewList={setNewList}
             handleListAddition={handleListAddition}
             />
-            <button onClick={handleListDeletion}> Delete Current List </button>
-            <PopupForm show={show} handleClose={handleClose} handleShow={handleShow} addUser={addUser} handleUserAddition={handleUserAddition}
+          <button onClick={handleListDeletion}> Delete Current List </button>
+          <PopupForm 
+            show={show} 
+            handleClose={handleClose} 
+            handleShow={handleShow} 
+            addUser={addUser} 
+            handleUserAddition={handleUserAddition}
             setAddUser={setAddUser}/>
           <List 
             activeList={activeList} 
