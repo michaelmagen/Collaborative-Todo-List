@@ -32,20 +32,14 @@ function App() {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  const handleUserAddition = () => {
-    console.log(addUser)
+  const handleUserAddition = async () => {
     try {
       const username = {
         username : addUser
       }
-      const newList = listService.addListUser(activeList.id,username)
-      console.log(newList)
+      await listService.addListUser(activeList.id,username)
     } catch (error) {
-      setMessage('Unable to add user. Make sure that the username entered is correct!')
-      setVariant('danger')
-      setTimeout( () => {
-        setMessage('')
-      }, 5000)
+      displayError('Unable to add user. Make sure that the username entered is correct!')
     }
     setAddUser('')
     handleClose()
@@ -93,11 +87,7 @@ function App() {
       setUsername('')
       setPassword('')
     } catch (exception) {
-      /// TODO: error message
-      console.log('Wrong credentials')
-      setTimeout(() => {
-        console.log('display some error message');
-      }, 5000)
+      displayError('Incorrect username or password. Please try again!')
     }
   }
 
@@ -229,6 +219,14 @@ function App() {
   }
   
   const deleteButtonVariant = activeList == null ? '' : 'danger'
+
+  const displayError = (message) => {
+    setMessage(message)
+    setVariant('danger')
+      setTimeout(() => {
+        setMessage('')
+      }, 5000)
+  }
 
   return (
     <div>
