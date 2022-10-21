@@ -39,7 +39,7 @@ function App() {
       }
       await listService.addListUser(activeList.id,username)
     } catch (error) {
-      displayError('Unable to add user. Make sure that the username entered is correct!')
+      displayError(`${error.response.data.error}. Make sure that the username entered is correct!`)
     }
     setAddUser('')
     handleClose()
@@ -86,7 +86,7 @@ function App() {
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (exception) {
+    } catch (error) {
       displayError('Incorrect username or password. Please try again!')
     }
   }
@@ -112,8 +112,8 @@ function App() {
       setUsername('')
       setPassword('')
       setName('')
-    } catch(exception) {
-      console.log('not able to create user')
+    } catch(error) {
+      displayError(`${error.response.data.error}. Unable to create new user.`)
     }
   }
 
@@ -137,18 +137,15 @@ function App() {
         setActiveList(newActiveList)
         console.log('the list items are now', newActiveList);
       }, 1000)
-    } catch(exception) {
-      /// TODO: SHOW ERROR TO THE USER
-      console.log(exception)
-
+    } catch(error) {
+      displayError(`${error.response.data.error}`)
     }
   }
 
   const handleItemAddition = async (event) => {
     event.preventDefault()
     if (newItem === '') {
-      /// TODO: error message to the user
-      console.log('items in the to do list can not be empty')
+      displayError('List item may not be empty. Unable to add list item.')
       return
     }
     // pass in the new item object and the list id
@@ -162,17 +159,14 @@ function App() {
       // update the active list with the new item so that the user does not need to refresh to see a new item
       const newActiveList = { ...activeList, items: activeList.items.concat(savedItem) }
       setActiveList(newActiveList)
-    } catch (exception) {
-      /// TODO: error message to user
-      console.log(exception);
-      setNewItem('')
+    } catch (error) {
+        displayError(`${error.response.data.error}`)
     }
   }
 
   const handleListAddition = async (event) => {
     if (newList === '') {
-      /// TODO: error message to the user
-      console.log('items in the to do list can not be empty')
+      displayError('List name may not be empty. Unable to create new list.')
       return
     }
     try {
@@ -187,9 +181,7 @@ function App() {
       setLists(newLists)
       setActiveList(savedList)
     } catch (error) {
-      /// TODO: error message to user
-      console.log(error.response.data)
-      setNewItem('')
+      displayError(`${error.response.data.error}`)
     }
   }
 
@@ -214,12 +206,13 @@ function App() {
       setLists(newLists)
       setActiveList(null)
     } catch (error) {
-      console.log(error)
+      displayError('Unable to delete list. Please try again.')
     }
   }
   
   const deleteButtonVariant = activeList == null ? '' : 'danger'
 
+  // takes in an error message. Displays error message to user and removes it after 5 seconds.
   const displayError = (message) => {
     setMessage(message)
     setVariant('danger')
