@@ -27,18 +27,18 @@ usersRouter.post('/', async (request, response) => {
   const existingUser = await User.findOne({ username })
   if (existingUser) {
     return response.status(400).json({
-      error: 'username must be unique'
+      error: 'Username must be unique'
     })
   }
 
-  if (!password) {
+  if (!password || !name || !username) {
     return response.status(400).json({
-        error: 'password can not be missing'
+        error: 'Password, name, and/or username may not be empty'
     })
   } 
   else if (password.length < 7) {
     return response.status(400).json({
-        error: 'password must be at least 7 characters'
+        error: 'Password must be at least 7 characters'
     })
   }
 
