@@ -264,11 +264,6 @@ function App() {
             setNewList={setNewList}
             handleListAddition={handleListAddition}
           />
-          <ListButton 
-            onClick={handleListDeletion} 
-            variant={deleteButtonVariant} 
-            text='Delete Current List' 
-          />
           <PopupForm 
             show={show} 
             handleClose={handleClose} 
@@ -277,6 +272,11 @@ function App() {
             handleUserAddition={handleUserAddition}
             setAddUser={setAddUser}
             activeList={activeList}
+          />
+          <ListButton 
+            onClick={handleListDeletion} 
+            variant={deleteButtonVariant} 
+            text='Delete Current List' 
           />
           <List 
             activeList={activeList} 
