@@ -99,6 +99,11 @@ listRouter.post('/user/:listid', async (request, response) => {
 
   const list = await List.findById(request.params.listid)
 
+  // the user being added is alreay in the list 
+  if (list.users.includes(newUser._id)) {
+    return response.status(401).json({ error: `User already in the list` })
+  }
+
   list.users = list.users.concat(newUser._id)
   await list.save()
 
