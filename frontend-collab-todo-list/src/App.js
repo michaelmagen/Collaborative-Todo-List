@@ -11,6 +11,9 @@ import AlertMessage from './components/Alert'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import ListButton from './components/Button'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 function App() {
   const [username, setUsername] = useState('') 
@@ -222,8 +225,13 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>TODO List App</h1>
+    <div >
+      <Container>
+        <Row className='text-center'>
+          <Col className='align-items-center'>
+            <h1>TODO List App</h1>
+          </Col>
+      </Row>
       <AlertMessage variant={variant} message={message}></AlertMessage>
       {user === null ?
         createUser ? 
@@ -278,6 +286,7 @@ function App() {
           />
         </>
       }
+      </Container>
     </div>
   )
 }

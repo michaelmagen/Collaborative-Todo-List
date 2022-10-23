@@ -80,6 +80,10 @@ listRouter.delete('/:id', async (request, response) => {
     }
   } 
 
+  // removing list from user list array
+  user.lists = user.lists.filter(list => list._id.toString() != request.params.id)
+  await user.save()
+  // update list so that it does not contained the user removed
   list.users = list.users.filter(x => x._id != user._id)
   await list.save()
 
