@@ -89,6 +89,9 @@ function App() {
       setUser(user)
       setUsername('')
       setPassword('')
+      // this is the fix the bug where no token provided when just logining in 
+      listService.setToken(user.token)
+      console.log(user.token)
     } catch (error) {
       displayError('Incorrect username or password. Please try again!')
     }
