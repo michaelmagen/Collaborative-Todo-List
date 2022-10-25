@@ -234,61 +234,61 @@ function App() {
           <Col className='align-items-center'>
             <h1>TODO List App</h1>
           </Col>
-      </Row>
-      <AlertMessage variant={variant} message={message}></AlertMessage>
-      {user === null ?
-        createUser ? 
-          <RegisterForm 
-            username={username}
-            password={password}
-            name={name}
-            setUsername={setUsername}
-            setPassword={setPassword}
-            setName={setName}
-            handleRegistration={handleRegistration}
-            setCreateUser={setCreateUser}
-            /> :
-          <LoginForm 
-            handleLogin={handleLogin} 
-            username={username} 
-            password={password} 
-            setPassword={setPassword} 
-            setUsername={setUsername}
-            setCreateUser={setCreateUser}
-            /> :
-        <>
-          <p>{user.name} logged-in</p>
-          <button onClick={handleLogOut}>Log Out</button>
-          <ListDirectory 
-            lists={lists} 
-            handleListChange={handleListChange} 
-            newList={newList}
-            setNewList={setNewList}
-            handleListAddition={handleListAddition}
-          />
-          <PopupForm 
-            show={show} 
-            handleClose={handleClose} 
-            handleShow={handleShow} 
-            addUser={addUser} 
-            handleUserAddition={handleUserAddition}
-            setAddUser={setAddUser}
-            activeList={activeList}
-          />
-          <ListButton 
-            onClick={handleListDeletion} 
-            variant={deleteButtonVariant} 
-            text='Delete Current List' 
-          />
-          <List 
-            activeList={activeList} 
-            handleCheckbox={handleCheckbox} 
-            newItem={newItem} 
-            setNewItem={setNewItem}
-            handleItemAddition={handleItemAddition}
-          />
-        </>
-      }
+        </Row>
+        <AlertMessage variant={variant} message={message}></AlertMessage>
+        {user === null ?
+          createUser ? 
+            <RegisterForm 
+              username={username}
+              password={password}
+              name={name}
+              setUsername={setUsername}
+              setPassword={setPassword}
+              setName={setName}
+              handleRegistration={handleRegistration}
+              setCreateUser={setCreateUser}
+              /> :
+            <LoginForm 
+              handleLogin={handleLogin} 
+              username={username} 
+              password={password} 
+              setPassword={setPassword} 
+              setUsername={setUsername}
+              setCreateUser={setCreateUser}
+              /> :
+          <>
+            <p>{user.name} logged-in</p>
+            <button onClick={handleLogOut}>Log Out</button>
+            <ListDirectory 
+              lists={lists} 
+              handleListChange={handleListChange} 
+              newList={newList}
+              setNewList={setNewList}
+              handleListAddition={handleListAddition}
+            />
+            <PopupForm 
+              show={show} 
+              handleClose={handleClose} 
+              handleShow={handleShow} 
+              addUser={addUser} 
+              handleUserAddition={handleUserAddition}
+              setAddUser={setAddUser}
+              activeList={activeList}
+            />
+            <ListButton 
+              onClick={handleListDeletion} 
+              variant={deleteButtonVariant} 
+              text='Delete Current List' 
+            />
+            <List 
+              activeList={activeList} 
+              handleCheckbox={handleCheckbox} 
+              newItem={newItem} 
+              setNewItem={setNewItem}
+              handleItemAddition={handleItemAddition}
+            />
+          </>
+        }
       </Container>
       <Footer />
     </div>
