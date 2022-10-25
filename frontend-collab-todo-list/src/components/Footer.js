@@ -1,0 +1,22 @@
+import { Github } from "react-bootstrap-icons"
+import Navbar from 'react-bootstrap/Navbar'
+import Button from 'react-bootstrap/Button'
+import Stack from 'react-bootstrap/Stack'
+
+const Footer = () => (
+    <>
+      <Navbar fixed='bottom' bg="dark" variant="dark" className='p-2'>
+        <Stack direction='horizontal' className="mx-auto">
+        <Navbar.Brand >Created By Michael Magen</Navbar.Brand>
+        <a href="https://github.com/michaelmagen/Collaborative-Todo-List">
+          <Button variant='light' className="rounded-pill">
+            <Github size={25} ></Github>
+          </Button>
+        </a>
+        </Stack>
+      </Navbar>
+      
+    </>
+)
+
+export default Footer

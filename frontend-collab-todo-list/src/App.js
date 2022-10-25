@@ -14,6 +14,7 @@ import ListButton from './components/ListButton'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Footer from './components/Footer'
 
 function App() {
   const [username, setUsername] = useState('') 
@@ -228,7 +229,7 @@ function App() {
 
   return (
     <div >
-      <Container>
+      <Container className='mb-5 pb-3'>
         <Row className='text-center'>
           <Col className='align-items-center'>
             <h1>TODO List App</h1>
@@ -289,7 +290,9 @@ function App() {
         </>
       }
       </Container>
+      <Footer />
     </div>
+    
   )
 }
 
