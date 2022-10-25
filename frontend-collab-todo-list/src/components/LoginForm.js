@@ -1,39 +1,37 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
+import Stack from 'react-bootstrap/Stack'
 
 const LoginForm = ({ handleLogin, username, password, setPassword, setUsername, setCreateUser}) => (
   <>
-    <Form>
-      <Form.Group className="mx-auto w-50 mb-2">
-        <Form.Label>Username</Form.Label>
-        <Form.Control 
-          type="text" 
-          placeholder="username" 
-          value={username} 
-          onChange={({target}) => setUsername(target.value)}
-        />
-      </Form.Group>
-      <Form.Group className="mx-auto w-50 mb-2" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control 
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={({target}) => setPassword(target.value)}
-        />
-      </Form.Group>
-    </Form>
-    <Row className='w-25 mx-auto m-4'>
-      <Button onClick={handleLogin} variant='primary'>
+    <Stack gap={2} className="col-md-5 mx-auto">
+      <Form>
+        <Form.Group className='m-2'>
+          <Form.Label>Username</Form.Label>
+          <Form.Control 
+            type="text" 
+            placeholder="username" 
+            value={username} 
+            onChange={({target}) => setUsername(target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword" className='m-2'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control 
+            type="password" 
+            placeholder="Password" 
+            value={password} 
+            onChange={({target}) => setPassword(target.value)}
+          />
+        </Form.Group>
+      </Form>
+      <Button onClick={handleLogin} className='w-75 mx-auto' variant='primary'>
         Sign in
       </Button>
-    </Row>
-    <Row className='w-25 mx-auto m-4'>
-      <Button onClick={() => setCreateUser(true)} variant='outline-secondary'>
+      <Button onClick={() => setCreateUser(true)} className='w-75 mx-auto' variant='outline-primary'>
         Create Account
       </Button>
-    </Row>
+    </Stack>
   </>
 )
 
