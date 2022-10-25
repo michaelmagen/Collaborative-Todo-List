@@ -25,10 +25,10 @@ const LoginForm = ({ handleLogin, username, password, setPassword, setUsername, 
           />
         </Form.Group>
       </Form>
-      <Button onClick={handleLogin} className='w-75 mx-auto' variant='primary'>
+      <Button onClick={handleLogin} className='m-1 w-75 mx-auto' variant='primary'>
         Sign in
       </Button>
-      <Button onClick={() => setCreateUser(true)} className='w-75 mx-auto' variant='outline-primary'>
+      <Button onClick={() => setCreateUser(true)} className='m-1 w-75 mx-auto' variant='outline-primary'>
         Create Account
       </Button>
     </Stack>
