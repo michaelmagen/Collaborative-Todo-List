@@ -6,11 +6,11 @@ import Stack from 'react-bootstrap/Stack'
 const Footer = () => (
     <>
       <Navbar fixed='bottom' bg="dark" variant="dark" className='p-2'>
-        <Stack direction='horizontal' className="mx-auto">
-        <Navbar.Brand >Created By Michael Magen</Navbar.Brand>
+        <Stack gap={2} direction='horizontal' className="mx-auto">
+        <Navbar.Text>Created By Michael Magen</Navbar.Text>
         <a href="https://github.com/michaelmagen/Collaborative-Todo-List">
           <Button variant='light' className="rounded-pill">
-            <Github size={25} ></Github>
+            <Github size={20} ></Github>
           </Button>
         </a>
         </Stack>
