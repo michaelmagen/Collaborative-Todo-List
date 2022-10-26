@@ -15,6 +15,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Footer from './components/Footer'
+import Header from './components/Header'
 
 function App() {
   const [username, setUsername] = useState('') 
@@ -229,6 +230,7 @@ function App() {
 
   return (
     <div >
+      <Header handleLogout={handleLogOut} user={user} />
       <Container className='mb-5 pb-3'>
         <Row className='text-center'>
           <Col className='align-items-center'>
