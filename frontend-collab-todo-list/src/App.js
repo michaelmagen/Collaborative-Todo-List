@@ -12,8 +12,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import ListButton from './components/ListButton'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Footer from './components/Footer'
 import Header from './components/Header'
 
@@ -231,12 +229,7 @@ function App() {
   return (
     <div >
       <Header handleLogout={handleLogOut} user={user} />
-      <Container className='mb-5 pb-3'>
-        <Row className='text-center'>
-          <Col className='align-items-center'>
-            <h1>TODO List App</h1>
-          </Col>
-        </Row>
+      <Container className='mb-5 pb-3 mt-5 pt-3'>
         <AlertMessage variant={variant} message={message}></AlertMessage>
         {user === null ?
           createUser ? 
@@ -259,8 +252,6 @@ function App() {
               setCreateUser={setCreateUser}
               /> :
           <>
-            <p>{user.name} logged-in</p>
-            <button onClick={handleLogOut}>Log Out</button>
             <ListDirectory 
               lists={lists} 
               handleListChange={handleListChange} 
