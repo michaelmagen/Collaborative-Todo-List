@@ -11,7 +11,7 @@ const  PopupForm = ({show, handleShow, handleClose, addUser, handleUserAddition,
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Add User To Current List
+        Add List User
       </Button>
 
       <Modal show={show} onHide={handleClose}>

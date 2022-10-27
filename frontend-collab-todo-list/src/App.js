@@ -15,6 +15,7 @@ import Container from 'react-bootstrap/Container'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import ListForm from './components/ListForm'
+import Stack from 'react-bootstrap/Stack'
 
 function App() {
   const [username, setUsername] = useState('') 
@@ -260,25 +261,28 @@ function App() {
               setNewList={setNewList}
               handleListAddition={handleListAddition}
             />
-            <ListForm 
-              handleListAddition={handleListAddition}
-              newList={newList}
-              setNewList={setNewList}
-            />
-            <PopupForm 
-              show={show} 
-              handleClose={handleClose} 
-              handleShow={handleShow} 
-              addUser={addUser} 
-              handleUserAddition={handleUserAddition}
-              setAddUser={setAddUser}
-              activeList={activeList}
-            />
-            <ListButton 
-              onClick={handleListDeletion} 
-              variant={deleteButtonVariant} 
-              text='Delete Current List' 
-            />
+            <Stack gap={2} direction='horizontal' className='col-md-5 mx-auto mb-3'>
+              <ListForm 
+                handleListAddition={handleListAddition}
+                newList={newList}
+                setNewList={setNewList}
+                className='w-auto'
+              />
+              <PopupForm 
+                show={show} 
+                handleClose={handleClose} 
+                handleShow={handleShow} 
+                addUser={addUser} 
+                handleUserAddition={handleUserAddition}
+                setAddUser={setAddUser}
+                activeList={activeList}
+              />
+              <ListButton 
+                onClick={handleListDeletion} 
+                variant={deleteButtonVariant} 
+                text='Delete List' 
+              />
+            </Stack>
             <List 
               activeList={activeList} 
               handleCheckbox={handleCheckbox} 
