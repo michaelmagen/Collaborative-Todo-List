@@ -14,6 +14,7 @@ import ListButton from './components/ListButton'
 import Container from 'react-bootstrap/Container'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import ListForm from './components/ListForm'
 
 function App() {
   const [username, setUsername] = useState('') 
@@ -258,6 +259,11 @@ function App() {
               newList={newList}
               setNewList={setNewList}
               handleListAddition={handleListAddition}
+            />
+            <ListForm 
+              handleListAddition={handleListAddition}
+              newList={newList}
+              setNewList={setNewList}
             />
             <PopupForm 
               show={show} 
