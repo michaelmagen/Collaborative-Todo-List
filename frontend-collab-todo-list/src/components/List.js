@@ -1,18 +1,5 @@
 import ListItem from "./ListItem"
 
-// const List = ({ title, listItems, handleCheckbox }) => {
-//   if (title === null || listItems === null) {
-//     return (<></>)
-//   }
-//   return (
-//   <>
-//     <h3> { title } </h3>
-//     {listItems.map(item => (
-//       <ListItem content={item} handleCheckbox={handleCheckbox} />
-//     ))}
-//   </>
-// )}
-
 const List = ({activeList, handleCheckbox, handleItemAddition, newItem, setNewItem}) => 
 {
   if (activeList === null) {
