@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 
-const LoginForm = ({ handleLogin, username, password, setPassword, setUsername, setCreateUser}) => (
+const LoginForm = ({ handleLogin, username, password, setPassword, setUsername, setCreateUser, handleDemo}) => (
   <>
     <Stack gap={2} className="col-md-5 mx-auto">
       <Form>
@@ -30,6 +30,10 @@ const LoginForm = ({ handleLogin, username, password, setPassword, setUsername, 
       </Button>
       <Button onClick={() => setCreateUser(true)} className='m-1 w-75 mx-auto' variant='outline-primary'>
         Create Account
+      </Button>
+      <div className='text-center mt-5'> Want to Demo the site? Click below: </div>
+      <Button variant='dark' onClick={handleDemo} className='w-50 mx-auto' >
+        Demo
       </Button>
     </Stack>
   </>

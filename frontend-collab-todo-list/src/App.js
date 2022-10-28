@@ -8,8 +8,6 @@ import List from './components/List'
 import RegisterForm from './components/RegisterForm'
 import PopupForm from './components/PopupForm'
 import AlertMessage from './components/Alert'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle.min'
 import ListButton from './components/ListButton'
 import Container from 'react-bootstrap/Container'
 import Footer from './components/Footer'
@@ -17,6 +15,8 @@ import Header from './components/Header'
 import ListForm from './components/ListForm'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min'
 
 function App() {
   const [username, setUsername] = useState('') 
@@ -120,6 +120,10 @@ function App() {
       setUsername('')
       setPassword('')
       setName('')
+      // save the token so that can send it to backend
+      listService.setToken(user.token)
+      // login form should be shown when logged out
+      setCreateUser(false)
     } catch(error) {
       displayError(`${error.response.data.error}. Unable to create new user.`)
     }
@@ -217,6 +221,26 @@ function App() {
       displayError('Unable to delete list. Please try again.')
     }
   }
+
+  const handleDemo = async () => {
+    try {
+      const user = await loginService.login({
+        username: 'GuestUser',
+        password: '1234567'
+      })
+      window.localStorage.setItem(
+        'loggedListappUser', JSON.stringify(user)
+      ) 
+
+      setUser(user)
+      setUsername('')
+      setPassword('')
+      // after login save the token so that requests can be authenticated  
+      listService.setToken(user.token)
+    } catch (error) {
+      displayError('Incorrect username or password. Please try again!')
+    }
+  }
   
   const deleteButtonVariant = activeList == null ? '' : 'danger'
 
@@ -253,6 +277,7 @@ function App() {
               setPassword={setPassword} 
               setUsername={setUsername}
               setCreateUser={setCreateUser}
+              handleDemo={handleDemo}
               /> :
           <>
             <Col md={8} sm={12} className='mx-auto'>
