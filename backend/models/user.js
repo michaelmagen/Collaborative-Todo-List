@@ -1,3 +1,7 @@
+/***************************************************/
+/**** Mongo User Schema                        *****/
+/***************************************************/
+
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
@@ -22,6 +26,7 @@ const userSchema = new mongoose.Schema({
   ]
 })
 
+// convert id object to string in returned object
 userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()

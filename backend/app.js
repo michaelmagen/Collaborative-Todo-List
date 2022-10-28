@@ -1,3 +1,7 @@
+/***************************************************/
+/**** API server application                   *****/
+/***************************************************/
+
 const config = require('./utils/config')
 const express = require('express')
 const app = express()
@@ -22,17 +26,20 @@ mongoose.connect(config.MONGODB_URI)
     logger.error('error connecting to MongoDB:', error.message)
 })
 
+// install middleware and cors
 app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 app.use(middleware.tokenExtractor)
 
+// install routes
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 app.use('/api/lists', listRouter)
 app.use('/api/items', itemRouter)
 
+// install error handeling
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 

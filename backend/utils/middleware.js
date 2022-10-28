@@ -1,9 +1,15 @@
+/***************************************************/
+/**** Middleware functions used in API         *****/
+/***************************************************/
+
 const logger = require('./logger')
 
+// handle unknown endpoint error
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
+// handle commmon errors
 const errorHandler = (error, request, response, next) => {
   logger.error(error.message)
 
@@ -28,6 +34,7 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
+// extract token from request
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get('authorization')
 

@@ -1,3 +1,7 @@
+/***************************************************/
+/**** Mongo To-do List Schema                  *****/
+/***************************************************/
+
 const mongoose = require('mongoose')
 
 const listSchema = new mongoose.Schema({
@@ -21,6 +25,7 @@ const listSchema = new mongoose.Schema({
     ]
 })
 
+// convert id object to string in returned object
 listSchema.set('toJSON', {
     transform: (document, returnedObject) => {
       returnedObject.id = returnedObject._id.toString()

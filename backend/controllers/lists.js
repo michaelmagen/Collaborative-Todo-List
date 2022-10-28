@@ -18,13 +18,10 @@ listRouter.get('/', async (request, response) => {
 })
   
 // get a specific list by the id
-////////////not tested /////////////
 listRouter.get('/:id', async (request, response) => {
     const list = await List.findById(request.params.id).populate('creator').populate('users').populate('items')
     response.json(list)
 })
-
-/// TODO: add a user to a list
 
 // create a new list for a user
 listRouter.post('/', async (request, response) => {
@@ -59,8 +56,9 @@ listRouter.post('/', async (request, response) => {
 })
 
 // allows a user to delete a list if they are loged in with a token
-// currently, this allows any user of the list to delete the list completely, not just the creator of the list
-listRouter.delete('/:id', async (request, response) => {
+// if list has other users, list will be removed from current user but not completely deleted
+// list only deleted if no users left in the list
+Router.delete('/:id', async (request, response) => {
   const token = request.token
   const decodedToken = jwt.verify(token, process.env.SECRET)
 
@@ -70,6 +68,7 @@ listRouter.delete('/:id', async (request, response) => {
 
   const usersInList = list.users.map(user => user._id.toString())
 
+  // delete a list completely if all users left
   if (usersInList.length === 1) {
     if ( usersInList.includes( user._id.toString() )) {
       await List.findByIdAndRemove(request.params.id)
@@ -92,8 +91,6 @@ listRouter.delete('/:id', async (request, response) => {
 
 // need to pass in the id of the new user being added
 listRouter.post('/user/:listid', async (request, response) => {
-  // const token = request.token
-  // const decodedToken = jwt.verify(token, process.env.SECRET)
 
   const newUser = await User.findOne({ username: request.body.username })
 
