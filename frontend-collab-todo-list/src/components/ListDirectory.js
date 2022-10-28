@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form'
 
-const ListDirectory = ({lists, handleListChange, newList, setNewList, handleListAddition}) => {
+const ListDirectory = ({lists, handleListChange}) => {
   if (lists === null) {
     return (<></>)
   }
