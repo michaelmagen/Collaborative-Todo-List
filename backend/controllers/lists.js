@@ -58,7 +58,7 @@ listRouter.post('/', async (request, response) => {
 // allows a user to delete a list if they are loged in with a token
 // if list has other users, list will be removed from current user but not completely deleted
 // list only deleted if no users left in the list
-Router.delete('/:id', async (request, response) => {
+listRouter.delete('/:id', async (request, response) => {
   const token = request.token
   const decodedToken = jwt.verify(token, process.env.SECRET)
 
