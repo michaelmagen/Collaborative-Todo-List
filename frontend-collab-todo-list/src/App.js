@@ -15,7 +15,8 @@ import Container from 'react-bootstrap/Container'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import ListForm from './components/ListForm'
-import Stack from 'react-bootstrap/Stack'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 
 function App() {
   const [username, setUsername] = useState('') 
@@ -254,35 +255,43 @@ function App() {
               setCreateUser={setCreateUser}
               /> :
           <>
-            <ListDirectory 
-              lists={lists} 
-              handleListChange={handleListChange} 
-              newList={newList}
-              setNewList={setNewList}
-              handleListAddition={handleListAddition}
-            />
-            <Stack gap={2} direction='horizontal' className='col-md-5 mx-auto mb-3'>
-              <ListForm 
-                handleListAddition={handleListAddition}
+            <Col md={8} sm={12} className='mx-auto'>
+              <ListDirectory 
+                lists={lists} 
+                handleListChange={handleListChange} 
                 newList={newList}
                 setNewList={setNewList}
-                className='w-auto'
+                handleListAddition={handleListAddition}
               />
-              <PopupForm 
-                show={show} 
-                handleClose={handleClose} 
-                handleShow={handleShow} 
-                addUser={addUser} 
-                handleUserAddition={handleUserAddition}
-                setAddUser={setAddUser}
-                activeList={activeList}
-              />
-              <ListButton 
-                onClick={handleListDeletion} 
-                variant={deleteButtonVariant} 
-                text='Delete List' 
-              />
-            </Stack>
+            </Col>
+            <Row className='mb-4'>
+              <Col className='d-flex justify-content-end'>
+                <PopupForm 
+                  show={show} 
+                  handleClose={handleClose} 
+                  handleShow={handleShow} 
+                  addUser={addUser} 
+                  handleUserAddition={handleUserAddition}
+                  setAddUser={setAddUser}
+                  activeList={activeList}
+                />
+              </Col>
+              <Col className='d-flex justify-content-center'>
+                <ListForm 
+                    handleListAddition={handleListAddition}
+                    newList={newList}
+                    setNewList={setNewList}
+                    className='justify-content-end'
+                />
+              </Col>
+              <Col className='d-flex justify-content-right'>
+                <ListButton 
+                  onClick={handleListDeletion} 
+                  variant={deleteButtonVariant} 
+                  text='Delete List' 
+                />
+              </Col>
+            </Row>
             <List 
               activeList={activeList} 
               handleCheckbox={handleCheckbox} 

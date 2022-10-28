@@ -10,7 +10,7 @@ const  PopupForm = ({show, handleShow, handleClose, addUser, handleUserAddition,
   }
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="success" onClick={handleShow}>
         Add List User
       </Button>
 
