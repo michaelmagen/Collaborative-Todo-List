@@ -9,11 +9,11 @@ The frontend is a simple react app that is styled with react boostrap.
 
 # Project Screen Shot
 
-Desktop view: 
+## Desktop view: 
 ![alt text](./frontend-collab-todo-list/public/ScreenShot.png)
 
-Mobile view:
-![alt text](./frontend-collab-todo-list/public/ScreenShotMobile.png)
+## Mobile view:
+<img src="./frontend-collab-todo-list/public/ScreenShotMobile.png" width=50% height=50%>
 
 # Author
 
